@@ -9,18 +9,31 @@
 	
 	import "github.com/alaaProg/restful"
 
-	type User struct{
-		restful.Controller
+	....
+	....
+
+	type UserCtrl struct{
+		restful.Controller 
 	}
 
-	func (user *User) Get(ctx *fiber.Ctx){
+	func (ctrl *UserCtrl) Get(ctx *fiber.Ctx){
 
 		ctx.Send("Get User")
 	}
 
-#### Route 
+	....
+	....
 
-	api := app.Group("/api/") // fiber Group 
+#### Route 	
 
-	restful.Resource("/user", api, new(ctrl.User)) 
+	import "github.com/alaaProg/restful"
 
+	...
+	...
+
+	api := app.Group("/api/") 
+
+	restful.Resource("/user", api, new(controller.UserCtrl))  // return *fiber.Group 
+
+	.... 
+	....
