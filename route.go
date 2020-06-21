@@ -15,3 +15,6 @@ func Resource(prefix string, group *fiber.Group, controller InterfaceResource) *
 
 	return resource
 }
+
+
+// Parser

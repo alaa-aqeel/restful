@@ -2,7 +2,12 @@ package restful
 
 import "github.com/gofiber/fiber"
 
-type Controller struct{ 
+type Messages map[string]map[string]string 
+type Map map[string]string 
+
+
+type Controller struct{
+	MessageValid Messages
 
 }
 
