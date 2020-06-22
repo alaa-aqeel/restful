@@ -21,6 +21,3 @@ func Resource(prefix string, group *fiber.Group,
 
 	return resource
 }
-
-
-// Parser
