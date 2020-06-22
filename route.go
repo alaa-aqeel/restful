@@ -7,9 +7,8 @@ func Resource(prefix string, group *fiber.Group,
 		controller InterfaceResource, handlers ...fiber.Handler) *fiber.Group {
 
 	resource := group.Group(prefix)
-
+	
 	for _, handler := range handlers {
-
 		resource.Use(handler)
 	}
 
