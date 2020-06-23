@@ -46,7 +46,4 @@ func VerifyToken(tokenString string ) (*jwt.StandardClaims, error) {
 
 
 	return claims, error
-
 }
-
-
