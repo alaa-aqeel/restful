@@ -40,6 +40,8 @@
 	....
 
 ##### Validation  
+__exmaple 1__
+validation with model 
 
 	type UserModel struct{
 
@@ -69,3 +71,25 @@
 
 	....
 	....
+
+__exmaple 2__
+validation form value 
+
+	type FormLogin string {
+
+		Email string `required:"true" match:"^[a-zA-Z0-9]+@[a-z]+\\.com$"`
+		Password string `required:"true" length:"8,25"`
+	}
+
+	func login(ctx *fiber.Ctx){
+		form := new(FormLogin)
+		ctx.BodyParser(form)
+
+		if message, err := ctrl.Valid(form); err {
+			ctx.Status(401).JSON(message)
+			return
+		}
+
+		.... 
+		...
+	}

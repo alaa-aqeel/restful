@@ -8,7 +8,7 @@ type Map map[string]string
 
 type Controller struct{
 	MessageValid Messages
-
+	
 }
 
 func (ctrl *Controller) Get(ctx    *fiber.Ctx){ ctx.Status(405).Send("Method Not Allowed") }
