@@ -33,17 +33,17 @@ func (ctrl *Controller) CreateToken(id string, exp time.Duration) (string, error
 	return "", errors.New("Must provide a secret key under env variable TOEKN_SECRET_KEY")
 }
 
-func VerifyToken(tokenString string ) (*jwt.StandardClaims, error) {
+func VerifyToken(tokenString string ) (*jwt.Token, *jwt.StandardClaims, error) {
 
 	SecretKey := os.Getenv("TOEKN_SECRET_KEY")
 
 	claims := &jwt.StandardClaims{}
 
-	_, error := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+	token, error := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 
 		return []byte(SecretKey), nil
 	})
 
 
-	return claims, error
+	return token, claims, error
 }
