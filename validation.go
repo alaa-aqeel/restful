@@ -1,3 +1,7 @@
+/*
+	Package restful implements a simple library for restful-api with fiber.
+	
+*/
 package restful 
 
 import (
@@ -8,8 +12,15 @@ import (
 	"regexp"
 )
 
+// fileds :
+// 	required :
+// 		The field under validation must be present in the input data and not empty
+// 	length:
+// 		The field under validation must have a size between the given min and max
+// 	match:
+// 		The field under validation must match the given regular expression.
 
-
+// The funcation Check length between the given min and max. 
 func Length(rule string, length int) bool{
 	
 	split := strings.Split(rule, ",")
@@ -19,12 +30,23 @@ func Length(rule string, length int) bool{
 	return (man > length || length > max ) 
 }
 
+// match with regular expression.
 func Match(pattern string, value string) bool {
 
 	match, _ := regexp.MatchString(pattern, value)
 	return match 
 }
 
+
+/* 	
+	Valid implements value validations for structs
+
+	parameter:
+		models: Fileds struct  
+
+	return map[string]interface{}, bool
+
+*/
 func (ctrl *Controller) Valid(models interface{}) (map[string]interface{}, bool) {
 
 	errorMap := make(map[string]interface{})

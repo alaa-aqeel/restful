@@ -1,3 +1,7 @@
+/*
+	Package restful implements a simple library for restful-api with fiber.
+	
+*/
 package restful 
 
 
@@ -8,7 +12,11 @@ import (
 	"errors"
 )
 
-
+// Create Token JWT 
+// parameter : 
+// 		id string : id user 
+//      exp number : ExpiresAt By Minute (60 * 24) = 1 day 
+// return token , error 
 func (ctrl *Controller) CreateToken(id string, exp time.Duration) (string, error) {
 
 	SecretKey := os.Getenv("TOEKN_SECRET_KEY")
@@ -22,7 +30,12 @@ func (ctrl *Controller) CreateToken(id string, exp time.Duration) (string, error
 		claims.ExpiresAt= time.Now().Add( ( 24 * 7 ) * time.Hour).Unix() // expires after 7 Day
 	}
 
-	if id != "" && SecretKey != "" {
+	if SecretKey == ""{
+
+		return "", errors.New("Must provide a secret key under env variable TOEKN_SECRET_KEY")
+	}
+
+	if id != "" {
 		claims.Id = id
 
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -30,9 +43,12 @@ func (ctrl *Controller) CreateToken(id string, exp time.Duration) (string, error
 		return token.SignedString( []byte(SecretKey) )
 	}
 
-	return "", errors.New("Must provide a secret key under env variable TOEKN_SECRET_KEY")
+	return "", errors.New("The field id is empty")
 }
 
+
+// Check Token by tokenString 
+// return Token, Clamis, error 
 func VerifyToken(tokenString string ) (*jwt.Token, *jwt.StandardClaims, error) {
 
 	SecretKey := os.Getenv("TOEKN_SECRET_KEY")
