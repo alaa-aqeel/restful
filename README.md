@@ -5,6 +5,6 @@
 ## Install 
 	go get github.com/alaaProg/restful
 
-Then import the validator package into your own code
+Then import the restful package into your own code
 	
 	import "github.com/alaaProg/restful"
